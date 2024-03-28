@@ -1,0 +1,21 @@
+[Parametres]
+Langue=Fran�ais
+VolumeSonPourcent=100
+VolumeSonMinPourcent=0
+VolumeSonMaxPourcent=100
+VolumeSonAlerte=70
+VolumeSonAlerteMessage=Attention: le son est à un volume élevé
+SensibiliteSourisPourcent=100
+SensibiliteSourisMinPourcent=0
+SensibiliteSourisMaxPourcent=100
+[graphismes]
+Graphismes=Faibles
+[Sauvegarde]
+SauvegardeAutomatiqueOuiNon=Non
+[Controles]
+DeplacerPersonnage=Clic gauche
+ActionsSurPersonnage=Clic droit
+OuvrirMenu=Échap
+[Mode]
+ModeStreameur=Oui
+Difficulte=Difficile
