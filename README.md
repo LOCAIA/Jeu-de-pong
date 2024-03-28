@@ -28,7 +28,58 @@ Pong est l'un des premiers jeux vidéo d'arcade, créé en 1972 par Allan Alcorn
 
 Ce jeu a été développé par Léo dans le cadre d'un projet personnel (en fait, je me faisais juste chier).
 
+
 ## Remerciements
 
 - Merci à... Attends... Personne ne m'a aidé, alors pourquoi je ferais des remerciements ?
 
+
+
+## Le code
+Je suis cool, alors je vous donne un extrait de code pour faire un cercle qui se déplace dans une fenêtre ;D
+```python
+# coding: utf8
+from tkinter import *
+from datetime import datetime
+
+DEBUG = False
+touches = set()
+
+def enfoncer(evt):
+    """Ajoute une touche à l'ensemble des touches enfoncées"""
+    touches.add(evt.keysym)
+    if DEBUG:
+        print("Pression :", touches)
+
+def relacher(evt):
+    """Enlève une touche à l'ensemble des touches enfoncées"""
+    if evt.keysym in touches:
+        touches.remove(evt.keysym)
+    if DEBUG:
+        print("Relâchement :", touches)
+
+def action():
+    """Gère les déplacements"""
+    #if DEBUG:
+    #    print(datetime.now())
+    if "Left" in touches:
+        c.move(r, -20, 0)   # Décalage vers la gauche (∆x = -20, ∆y = 0).
+    if "Right" in touches:
+        c.move(r, 20, 0)    # Décalage vers la droite (∆x = +20, ∆y = 0).
+    if "Up" in touches:
+        c.move(r, 0, -20)   # Décalage vers le haut (∆x = 0, ∆y = -20).
+    if "Down" in touches:   # ⚠ l'axe des ordonnées est orienté VERS LE BAS !
+        c.move(r, 0, 20)    # Décalage vers le bas  (∆x = 0, ∆y = +20).
+    f.after(25, action)     # action() est exécutée toutes les 25 ms
+
+f = Tk()
+c = Canvas(f, bg='dark grey', width=800, height=600)
+r = c.create_oval(350, 350, 450, 450, fill="red", width=10, outline="blue")
+c.pack()
+action()                    # action() est appelée une première fois
+
+f.bind('<KeyPress>', enfoncer)      # enfoncer() est lancée par un appui sur N'IMPORTE QUELLE touche
+f.bind('<KeyRelease>', relacher)    # relacher() est lancée lorsqu'on relâche N'IMPORTE QUELLE touche
+
+f.mainloop()
+```
